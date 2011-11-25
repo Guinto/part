@@ -8,11 +8,14 @@ ALL=part
 
 all: $(ALL)
 
-part: lib/*.o main.o
+part: Main.o Utilities.o
 	$(CC) $(CFLAGS) -o $@ $^
 
-main.o: src/main.cpp src/*.h
+Main.o: src/Main.cpp
 	$(CC) $(CFLAGS) -c $<
+
+Utilities.o: src/Utilities.cpp src/Utilities.h
+	$(CC) $(CFLAGS) -c $^
 
 clean:
 	rm -rf core* *.o *.gch src/*.gch $(ALL)
