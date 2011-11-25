@@ -5,10 +5,10 @@
 #include "Utilities.h"
 
 int Utilities::getGlobalWidth() {
-   return globalWidth;
+   return WINDOW_SIZE;
 }
 
 int Utilities::getGlobalHeight() {
-   return globalHeight;
+   return WINDOW_SIZE;
 }
 

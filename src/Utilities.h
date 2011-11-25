@@ -16,18 +16,7 @@
 #define WINDOW_SIZE 400
 
 class Utilities {
-   private:
-      int globalWidth;
-      int globalHeight;
-
-   Utilities::Utilities() {
-      globalWidth = WINDOW_SIZE;
-      globalHeight = WINDOW_SIZE;
-   }
-
    public:
-      static int setGlobalWidth();
-      static int setGlobalHeight();
       static int getGlobalWidth();
       static int getGlobalHeight();
 };
