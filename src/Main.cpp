@@ -2,9 +2,7 @@
 #include "Keyboard.h"
 #include "Mouse.h"
 #include "Window.h"
-#include "Object.h"
-#include "Cube.h"
-#include "ObjectCollection.h"
+#include "Scene.h"
 
 void initializeGlobalVariables();
 void initializeGlutSettings(int argc, char **argv);
@@ -12,21 +10,35 @@ void enableDepthTestingForRendering3DPolygons();
 void registerCallbackFunctions();
 void startTheMainLoop();
 
+Scene scene;
+long startLoop;
+
+void setupScene() {
+   scene.setup();
+}
+
+void loop(int n) {
+   long oldStartLoop = startLoop;
+   startLoop = (long) glutGet(GLUT_ELAPSED_TIME);
+   float timeElapsed = (float) (startLoop - oldStartLoop);
+
+   scene.update(timeElapsed);
+   
+   glutPostRedisplay();
+   glutTimerFunc(TIMER_TRIGGER, loop, TIMER_TRIGGER);
+}
+
 void display() {
    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
    glMatrixMode(GL_MODELVIEW);
 
-   ObjectCollection objects;
-   objects.add(new Cube());
+   scene.display();
 
-   glLoadIdentity();
-   objects.get(0)->transform();
-   objects.get(0)->draw();
- 
    glutSwapBuffers();
 }
 
 int main(int argc, char** argv) {
+   setupScene();
    initializeGlobalVariables();
    initializeGlutSettings(argc, argv);
    enableDepthTestingForRendering3DPolygons();
@@ -35,6 +47,8 @@ int main(int argc, char** argv) {
 }
 
 void initializeGlobalVariables() {
+   startLoop = 0;
+   glutTimerFunc(TIMER_TRIGGER, loop, TIMER_TRIGGER);
    initializeMousePosition();
 }
 

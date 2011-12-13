@@ -9,6 +9,7 @@ class Object {
       virtual ~Object() {}
       virtual void transform() = 0;
       virtual void draw() = 0;
+      virtual void update(float timeElapsed) = 0;
 };
 
 #endif

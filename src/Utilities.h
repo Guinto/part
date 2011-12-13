@@ -28,6 +28,7 @@
 
 #define WINDOW_WIDTH 1080
 #define WINDOW_HEIGHT 720
+#define TIMER_TRIGGER 10
 
 class Utilities {
    public:

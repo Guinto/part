@@ -8,7 +8,7 @@ ALL=part
 
 all: $(ALL)
 
-part: Main.o Utilities.o Keyboard.o Mouse.o Window.o Cube.o ObjectCollection.o
+part: Main.o Utilities.o Keyboard.o Mouse.o Window.o Cube.o ObjectCollection.o Scene.o
 	$(CC) $(CFLAGS) -o $@ $^
 
 Main.o: src/Main.cpp src/*.h
@@ -30,6 +30,9 @@ Cube.o: src/Cube.cpp src/Cube.h
 	$(CC) $(CFLAGS) -c $^
 
 ObjectCollection.o: src/ObjectCollection.cpp src/ObjectCollection.h
+	$(CC) $(CFLAGS) -c $^
+
+Scene.o: src/Scene.cpp src/Scene.h
 	$(CC) $(CFLAGS) -c $^
 
 clean:

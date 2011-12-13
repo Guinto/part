@@ -1,8 +1,12 @@
 #include "Cube.h"
 
 void Cube::transform() {
-   glRotatef(-45, 0, 1, 0);
-   glRotatef(45, 1, 0, 0);
+   glRotatef(-45, 1, 0, 0);
+   glRotatef(rotationDegrees, 0, 1, 0);
+}
+
+void Cube::update(float timeElapsed) {
+   rotationDegrees += timeElapsed / 20;
 }
 
 void Cube::draw() {
