@@ -1,9 +1,6 @@
 #ifndef _MOUSE_H_
 #define _MOUSE_H_
 
-#include <stdlib.h>
-#include <stdio.h>
-#include <GL/glut.h>
 #include "Utilities.h"
 
 void initializeMousePosition();

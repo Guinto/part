@@ -9,14 +9,30 @@
 #include <stdio.h>
 #include <math.h>
 #include <assert.h>
-#include <GL/glut.h>
 
+#if 0 /* unix */
+#include <GL/glut.h>
 #endif
 
-#define WINDOW_SIZE 400
+#if 1 /* mac */
+#include <GLUT/glut.h>
+#include <OPENGL/gl.h>
+#include <OPENGL/glext.h>
+#endif
+
+#if 0 /* pc */
+#include <io.h>
+#include <fcnt1.h>
+#include <glut.h>
+#endif
+
+#define WINDOW_WIDTH 1080
+#define WINDOW_HEIGHT 720
 
 class Utilities {
    public:
       static int getGlobalWidth();
       static int getGlobalHeight();
 };
+
+#endif
