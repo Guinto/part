@@ -29,9 +29,14 @@ void loop(int n) {
 }
 
 void display() {
+   glFlush();
    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-   glMatrixMode(GL_MODELVIEW);
+   glMatrixMode(GL_PROJECTION);
+   glLoadIdentity();
+   gluPerspective(60, ((float)Utilities::getGlobalWidth()) / 
+         Utilities::getGlobalHeight(), 0.05, 2000);
 
+   glMatrixMode(GL_MODELVIEW);
    scene.display();
 
    glutSwapBuffers();

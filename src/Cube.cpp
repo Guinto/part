@@ -1,8 +1,15 @@
 #include "Cube.h"
 
 void Cube::transform() {
+   glTranslatef(position.x, position.y, position.z);
    glRotatef(-45, 1, 0, 0);
    glRotatef(rotationDegrees, 0, 1, 0);
+}
+
+void Cube::setPosition(Point3d newPosition) {
+   position.x = newPosition.x;
+   position.y = newPosition.y;
+   position.z = newPosition.z;
 }
 
 void Cube::update(float timeElapsed) {
