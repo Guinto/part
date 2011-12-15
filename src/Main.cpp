@@ -4,6 +4,10 @@
 #include "Window.h"
 #include "Scene.h"
 
+#define FIELD_OF_VIEW_ANGLE 60
+#define NEAR_CLIPPING_PLANE 0.05
+#define FAR_CLIPPING_PLANE 2000
+
 void initializeGlobalVariables();
 void initializeGlutSettings(int argc, char **argv);
 void enableDepthTestingForRendering3DPolygons();
@@ -33,8 +37,10 @@ void display() {
    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
    glMatrixMode(GL_PROJECTION);
    glLoadIdentity();
-   gluPerspective(60, ((float)Utilities::getGlobalWidth()) / 
-         Utilities::getGlobalHeight(), 0.05, 2000);
+   gluPerspective(FIELD_OF_VIEW_ANGLE, 
+      ((float)Utilities::getGlobalWidth()) / Utilities::getGlobalHeight(), 
+      NEAR_CLIPPING_PLANE,
+      FAR_CLIPPING_PLANE);
 
    glMatrixMode(GL_MODELVIEW);
    scene.display();
