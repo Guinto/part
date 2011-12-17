@@ -3,6 +3,8 @@
 
 #include "ParticleSystem.h"
 #include "ObjectCollection.h"
+#include "Ground.h"
+#include "Camera.h"
 
 class Scene {
    public:
@@ -12,6 +14,8 @@ class Scene {
       void update(float timeElapsed);
 
       ObjectCollection objects;
+      Camera camera;
+      Ground ground;
 };
 
 #endif
