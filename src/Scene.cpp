@@ -16,8 +16,7 @@ void Scene::update(float timeElapsed) {
 }
 
 void Scene::setup() {
-   Particle *p = new Particle();
-   p->setRotationAxis(Point3d(1, 1, 0));
-   p->setPosition(Point3d(0, 0, -1));
-   objects.add(p);
+   ParticleSystem *ps = new ParticleSystem();
+   ps->setPosition(Point3d(0, 0, -1));
+   objects.add(ps);
 }

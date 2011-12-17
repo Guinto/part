@@ -1,7 +1,7 @@
 #ifndef _SCENE_H_
 #define _SCENE_H_
 
-#include "Particle.h"
+#include "ParticleSystem.h"
 #include "ObjectCollection.h"
 
 class Scene {

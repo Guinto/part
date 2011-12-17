@@ -19,6 +19,7 @@ class Particle: public Object {
       void draw();
       void update(float timeElapsed);
       void setPosition(Point3d newPosition);
+      void setRandomPosition();
       void setRotationAxis(Point3d newRotationAxis);
       void setRotationDegree(float newRotationDegree);
 };
