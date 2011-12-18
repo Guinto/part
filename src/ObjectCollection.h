@@ -9,8 +9,9 @@ class ObjectCollection {
    public:
       std::vector<Object*> collection;
       void add(Object *o); 
+      void del(int index);
       int size();
-      Object* get(int x);
+      Object* get(int index);
 };
 
 #endif

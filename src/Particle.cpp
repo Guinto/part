@@ -1,5 +1,15 @@
 #include "Particle.h"
 
+Particle::Particle() {
+   createColorVariance();
+   life.time = LIFE_TIME;
+}
+
+void Particle::createColorVariance() {
+   float colorBase = Utilities::randomZeroToOne();
+   color = Color(colorBase, colorBase, colorBase);
+}
+
 void Particle::setRandomPosition() {
    position.x = Utilities::randomNegOneToOne();
    position.y = Utilities::randomNegOneToOne();
@@ -18,6 +28,11 @@ void Particle::setRotationDegree(float newRotationDegree) {
 
 void Particle::update(float timeElapsed) {
    rotationDegree++;
+   life.time -= timeElapsed;
+}
+
+bool Particle::isDead() {
+   return life.time <= 0;
 }
 
 void Particle::draw() {

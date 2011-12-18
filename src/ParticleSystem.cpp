@@ -1,12 +1,16 @@
 #include "ParticleSystem.h"
 
 void ParticleSystem::update(float timeElapsed) {
-   Particle *p = new Particle();
-   p->setRandomPosition();
-   particles.add(p);
+   Particle *particle = new Particle();
+   particle->setRandomPosition();
+   particles.add(particle);
 
    for (unsigned int i = 0; i < particles.size(); i++) {
-      particles.get(i)->update(timeElapsed);
+      Particle *p = (Particle*) particles.get(i);
+      p->update(timeElapsed);
+      if (p->isDead()) {
+         particles.del(i);
+      }
    }
 }
 

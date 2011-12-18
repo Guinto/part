@@ -5,20 +5,25 @@
 #include "Point3d.h"
 #include "Color.h"
 
+#define LIFE_TIME 2000
+
+typedef struct Life {
+   float time;
+} Life;
+
 class Particle: public Object {
    private:
       Point3d rotationAxis;
       float rotationDegree;
       Color color;
+      Life life;
 
    public:
-      Particle() {
-         rotationAxis = Point3d();
-         rotationDegree = 0;
-         color = Color(1, 1, 1);
-      }
+      Particle();
       void draw();
       void update(float timeElapsed);
+      bool isDead();
+      void createColorVariance();
       void setRandomPosition();
       void setRotationAxis(Point3d newRotationAxis);
       void setRotationDegree(float newRotationDegree);
