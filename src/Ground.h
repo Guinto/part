@@ -6,15 +6,15 @@
 
 class Ground: public Object {
    private:
-      Point3d position;
-
+      void drawHorizontalLines();
+      void drawVerticalLines();
+      
    public:
       Ground() {
          position = Point3d(0, -5, 0);
       }
       void draw();
       void update(float timeElapsed);
-      void setPosition(Point3d newPosition);
 };
 
 #endif

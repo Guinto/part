@@ -34,6 +34,8 @@ class Utilities {
    public:
       static int getGlobalWidth();
       static int getGlobalHeight();
+      static float randomNegOneToOne();
+      static float randomZeroToOne();
 };
 
 #endif

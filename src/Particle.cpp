@@ -1,19 +1,9 @@
 #include "Particle.h"
 
-float randomizer() {
-   return (float) rand() / RAND_MAX * 2 - 1;
-}
-
-void Particle::setPosition(Point3d newPosition) {
-   position.x = newPosition.x;
-   position.y = newPosition.y;
-   position.z = newPosition.z;
-}
-
 void Particle::setRandomPosition() {
-   position.x = randomizer();
-   position.y = randomizer();
-   position.z = randomizer();
+   position.x = Utilities::randomNegOneToOne();
+   position.y = Utilities::randomNegOneToOne();
+   position.z = Utilities::randomNegOneToOne();
 }
 
 void Particle::setRotationAxis(Point3d newRotationAxis) {
@@ -32,7 +22,7 @@ void Particle::update(float timeElapsed) {
 
 void Particle::draw() {
    glPushMatrix(); {
-      glColor3f(0.4f, 0.4f, 0.6f);
+      glColor3f(color.red, color.green, color.blue);
       glTranslatef(position.x, position.y, position.z);
       glRotatef(rotationDegree, rotationAxis.x, rotationAxis.y, rotationAxis.z);
       glutSolidCube(0.1);

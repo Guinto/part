@@ -1,11 +1,5 @@
 #include "ParticleSystem.h"
 
-void ParticleSystem::setPosition(Point3d newPosition) {
-   position.x = newPosition.x;
-   position.y = newPosition.y;
-   position.z = newPosition.z;
-}
-
 void ParticleSystem::update(float timeElapsed) {
    Particle *p = new Particle();
    p->setRandomPosition();
