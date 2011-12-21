@@ -6,12 +6,14 @@
 #include "Color.h"
 
 #define DEFAULT_LIFE_TIME 4
+#define DEFAULT_ROTATION 0
 #define DEFAULT_BIRTH_SIZE 0.1f
 #define DEFAULT_DEATH_SIZE 0
 #define DEFAULT_RED 0
 #define DEFAULT_GREEN 0
 #define DEFAULT_BLUE 0
-#define PHYSICS_POSITION_CONSTANT 0.5
+#define DEFAULT_SIZE_VARIANCE 0.5f
+#define PHYSICS_POSITION_CONSTANT 0.5f
 #define DEFAULT_MASS 50
 
 typedef struct Life {
@@ -36,16 +38,17 @@ class Particle: public Object {
       Point3d force;
       float mass;
 
+      void initializeDefaultLifeVariables();
+      void initializeRotation();
       void initializeColor();
       void createColorVariance();
-      void initializeDefaultLifeVariables();
+      void createSizeVariance();
       void initializeDefaultSize();
       void initializeDefaultPhysics();
       void interpolateLifeTime();
       void setTimeElapsed(float newTimeElapsed);
       void interpolateSize();
       void interpolateColor();
-      void interpolateRotation();
       void calculatePhysics();
       void calculateAcceleration();
       void calculateVelocity();

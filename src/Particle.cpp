@@ -1,8 +1,9 @@
 #include "Particle.h"
 
 Particle::Particle() {
-   initializeColor();
    initializeDefaultLifeVariables();
+   initializeRotation();
+   initializeColor();
    initializeDefaultSize();
    initializeDefaultPhysics();
 }
@@ -13,6 +14,11 @@ void Particle::initializeDefaultLifeVariables() {
    life.deathSize = DEFAULT_DEATH_SIZE;
    life.birthColor = Color(DEFAULT_RED, DEFAULT_GREEN, DEFAULT_BLUE);
    life.deathColor = Color(DEFAULT_RED, DEFAULT_GREEN, DEFAULT_BLUE);
+}
+
+void Particle::initializeRotation() {
+   rotationDegree = DEFAULT_ROTATION;
+   rotationAxis = Point3d();
 }
 
 void Particle::initializeColor() {
@@ -26,7 +32,12 @@ void Particle::createColorVariance() {
 }
 
 void Particle::initializeDefaultSize() {
-   size = life.birthSize;
+   createSizeVariance();
+   size += life.birthSize;
+}
+
+void Particle::createSizeVariance() {
+   size = Utilities::randomZeroToOne() * DEFAULT_SIZE_VARIANCE;
 }
 
 void Particle::initializeDefaultPhysics() {
@@ -43,7 +54,6 @@ void Particle::update(float timeElapsed) {
    interpolateLifeTime();
    interpolateSize();
    interpolateColor();
-   interpolateRotation();
    calculatePhysics();
 }
 
@@ -61,10 +71,6 @@ void Particle::interpolateSize() {
 
 void Particle::interpolateColor() {
    color -= ((color - life.deathColor) / life.time) * timeElapsed;
-}
-
-void Particle::interpolateRotation() {
-   rotationDegree++;
 }
 
 void Particle::calculatePhysics() {

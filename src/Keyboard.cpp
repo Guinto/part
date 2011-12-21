@@ -1,35 +1,29 @@
 #include "Keyboard.h"
+#include "Scene.h"
 
-/*an example of a simple data structure to store a 4x4 matrix */
-GLfloat objectMatrix[4][4] = {
-  {1.0, 0.0, 0.0, 0.0},
-  {0.0, 1.0, 0.0, 0.0},
-  {0.0, 0.0, 1.0, 0.0},
-  {0.0, 0.0, 0.0, 1.0}
-};
+extern Scene scene;
+KeyboardState keyboardState;
 
-GLfloat *trackballM = (GLfloat *)objectMatrix;
+void updateKeyboardStateInScene() {
+   scene.setKeyboardState(keyboardState);
+}
 
 void keyboard(unsigned char key, int x, int y) {
-   switch( key ) {
-   case 'q': case 'Q' :
-      exitProgram();
-      break;
-   case 'r' : case 'R' :
-      resetLocalMatrixToIdentity();
-      break;
+   switch (key) {
+      case 27:
+         exitProgram();
+         break;
+
+      default:
+         keyboardState.set(key, true);
+         break;
    }
 }
 
-void exitProgram() {
-   exit( EXIT_SUCCESS );
+void keyboardUp(unsigned char key, int x, int y) {
+   keyboardState.set(key, false);
 }
 
-void resetLocalMatrixToIdentity() {
-   glMatrixMode(GL_MODELVIEW);
-   glPushMatrix();
-   glLoadIdentity();
-   glGetFloatv(GL_MODELVIEW_MATRIX, trackballM);
-   glPopMatrix();
-   glutPostRedisplay();
+void exitProgram() {
+   exit(EXIT_SUCCESS);
 }

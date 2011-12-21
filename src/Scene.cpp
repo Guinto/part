@@ -1,6 +1,6 @@
 #include "Scene.h"
 
-void Scene::display() {
+void Scene::draw() {
    camera.updateLookAt();
    glPushMatrix(); {
       ground.draw();
@@ -11,9 +11,21 @@ void Scene::display() {
 }
 
 void Scene::update(float timeElapsed) {
+   updateKeyboardStateInObjects();
    camera.update();
    for (unsigned int i = 0; i < objects.size(); i++) {
       objects.get(i)->update(timeElapsed);
+   }
+}
+
+void Scene::setKeyboardState(KeyboardState newKeyboardState) {
+   keyboardState = newKeyboardState;
+}
+
+void Scene::updateKeyboardStateInObjects() {
+   for (unsigned int i = 0; i < objects.size(); i++) {
+      ParticleSystem *ps = (ParticleSystem*) objects.get(i);
+      ps->setKeyboardState(keyboardState);
    }
 }
 

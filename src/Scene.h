@@ -7,15 +7,19 @@
 #include "Camera.h"
 
 class Scene {
-   public:
-      ~Scene() {}
-      void setup();
-      void display();
-      void update(float timeElapsed);
-
+   private:
+      KeyboardState keyboardState;
       ObjectCollection objects;
       Camera camera;
       Ground ground;
+
+      void updateKeyboardStateInObjects();
+
+   public:
+      void setup();
+      void draw();
+      void update(float timeElapsed);
+      void setKeyboardState(KeyboardState newKeyboardState);
 };
 
 #endif

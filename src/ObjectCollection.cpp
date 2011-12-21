@@ -4,7 +4,7 @@ void ObjectCollection::add(Object *o) {
    collection.push_back(o);
 }
 
-void ObjectCollection::del(int index) {
+void ObjectCollection::erase(int index) {
    collection.erase(collection.begin() + index);
 }
 

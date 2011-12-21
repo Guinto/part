@@ -8,6 +8,7 @@
 #define NEAR_CLIPPING_PLANE 0.05
 #define FAR_CLIPPING_PLANE 2000
 #define MILLISECONDS_OVER_SECONDS .001
+#define IGNORE_KEY_REPEAT_ON 1
 
 void initializeGlobalVariables();
 void initializeGlutSettings(int argc, char **argv);
@@ -28,6 +29,7 @@ void loop(int n) {
    float timeElapsed = (float) (startLoop - oldStartLoop);
    timeElapsed = timeElapsed * MILLISECONDS_OVER_SECONDS;
 
+   updateKeyboardStateInScene();
    scene.update(timeElapsed);
    
    glutPostRedisplay();
@@ -47,7 +49,7 @@ void display() {
 
    glMatrixMode(GL_MODELVIEW);
    glLoadIdentity();
-   scene.display();
+   scene.draw();
 
    glutSwapBuffers();
 }
@@ -72,6 +74,7 @@ void initializeGlutSettings(int argc, char **argv) {
    glutInitWindowSize(Utilities::getGlobalWidth(), Utilities::getGlobalHeight());
    glutInitDisplayMode( GLUT_RGB | GLUT_DOUBLE | GLUT_DEPTH);
    glutCreateWindow("Particle System");
+   glutIgnoreKeyRepeat(IGNORE_KEY_REPEAT_ON);
 }
 
 void enableDepthTestingForRendering3DPolygons() {
@@ -85,6 +88,7 @@ void registerCallbackFunctions() {
    glutMouseFunc(mouseClick);
    glutMotionFunc(mouseMove);
    glutKeyboardFunc(keyboard);
+   glutKeyboardUpFunc(keyboardUp);
 }
 
 void startTheMainLoop() {
