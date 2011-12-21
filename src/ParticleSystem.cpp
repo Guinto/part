@@ -23,7 +23,9 @@ void ParticleSystem::addParticlesToSystem() {
    if (particlesPerSecond > timeElapsed) {
       int particlesToAdd = (int)(particlesPerSecond / timeElapsed);
       for (unsigned int i = 0; i < particlesToAdd; i++) {
-         particles.add(new Particle());
+         Particle *p = new Particle();
+         p->setPosition(Point3d(position.x, position.y, position.z));
+         particles.add(p);
       }
       particlesPerSecond = 0;
    } else {
@@ -64,7 +66,6 @@ void ParticleSystem::keyboardActions() {
 
 void ParticleSystem::draw() {
    glPushMatrix(); {
-      glTranslatef(position.x, position.y, position.z);
       for (unsigned int i = 0; i < particles.size(); i++) {
          particles.get(i)->draw();
       }

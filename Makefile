@@ -8,7 +8,7 @@ ALL=part
 
 all: $(ALL)
 
-part: Main.o Utilities.o Keyboard.o KeyboardState.o Mouse.o Window.o Camera.o Particle.o ParticleSystem.o ObjectCollection.o Ground.o Scene.o
+part: Main.o Utilities.o Keyboard.o KeyboardState.o Mouse.o Window.o Camera.o Particle.o ParticleSystem.o Object.o ObjectCollection.o Ground.o Scene.o
 	$(CC) $(CFLAGS) -o $@ $^
 
 Main.o: src/Main.cpp src/*.h
@@ -17,7 +17,7 @@ Main.o: src/Main.cpp src/*.h
 Utilities.o: src/Utilities.cpp src/Utilities.h
 	$(CC) -c $^
 
-Keyboard.o: src/Keyboard.cpp src/Keyboard.h
+Keyboard.o: src/Keyboard.cpp src/Keyboard.h 
 	$(CC) -c $^
 
 KeyboardState.o: src/KeyboardState.cpp src/KeyboardState.h
@@ -36,6 +36,9 @@ Particle.o: src/Particle.cpp src/Particle.h
 	$(CC) -c $^
 
 ParticleSystem.o: src/ParticleSystem.cpp src/ParticleSystem.h
+	$(CC) -c $^
+
+Object.o: src/Object.cpp src/Object.h
 	$(CC) -c $^
 
 ObjectCollection.o: src/ObjectCollection.cpp src/ObjectCollection.h
