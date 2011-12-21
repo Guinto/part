@@ -7,6 +7,7 @@
 #define FIELD_OF_VIEW_ANGLE 60
 #define NEAR_CLIPPING_PLANE 0.05
 #define FAR_CLIPPING_PLANE 2000
+#define MILLISECONDS_OVER_SECONDS .001
 
 void initializeGlobalVariables();
 void initializeGlutSettings(int argc, char **argv);
@@ -25,6 +26,7 @@ void loop(int n) {
    long oldStartLoop = startLoop;
    startLoop = (long) glutGet(GLUT_ELAPSED_TIME);
    float timeElapsed = (float) (startLoop - oldStartLoop);
+   timeElapsed = timeElapsed * MILLISECONDS_OVER_SECONDS;
 
    scene.update(timeElapsed);
    

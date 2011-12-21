@@ -1,9 +1,7 @@
 #include "ParticleSystem.h"
 
 void ParticleSystem::update(float timeElapsed) {
-   Particle *particle = new Particle();
-   particle->setRandomPosition();
-   particles.add(particle);
+   particles.add(new Particle());
 
    for (unsigned int i = 0; i < particles.size(); i++) {
       Particle *p = (Particle*) particles.get(i);

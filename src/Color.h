@@ -27,6 +27,11 @@ typedef struct Color {
    Color operator/ (float x) {
       return Color(red / x, green / x, blue / x);
    }
+   Color operator= (Color c) {
+      red = c.red;
+      green = c.green;
+      blue = c.blue;
+   }
 
 } Color;
 

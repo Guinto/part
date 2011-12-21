@@ -1,14 +1,23 @@
 #include "Particle.h"
 
 Particle::Particle() {
-   createColorVariance();
+   initializeColor();
+   initializeDefaultLifeVariables();
+   initializeDefaultSize();
+   initializeDefaultPhysics();
+}
+
+void Particle::initializeDefaultLifeVariables() {
    life.time = DEFAULT_LIFE_TIME;
    life.birthSize = DEFAULT_BIRTH_SIZE;
    life.deathSize = DEFAULT_DEATH_SIZE;
    life.birthColor = Color(DEFAULT_RED, DEFAULT_GREEN, DEFAULT_BLUE);
    life.deathColor = Color(DEFAULT_RED, DEFAULT_GREEN, DEFAULT_BLUE);
-   setColor();
-   size = life.birthSize;
+}
+
+void Particle::initializeColor() {
+   createColorVariance();
+   color += life.birthColor;
 }
 
 void Particle::createColorVariance() {
@@ -16,17 +25,31 @@ void Particle::createColorVariance() {
    color = Color(colorBase, colorBase, colorBase);
 }
 
-void Particle::setColor() {
-   color += life.birthColor;
+void Particle::initializeDefaultSize() {
+   size = life.birthSize;
 }
 
-void Particle::update(float dt) {
-   timeElapsed = dt;
+void Particle::initializeDefaultPhysics() {
+   position = Point3d();
+   velocity = Point3d(Utilities::randomNegOneToOne(),
+                      Utilities::randomNegOneToOne(),
+                      Utilities::randomNegOneToOne());
+   force = Point3d(-velocity.x, -velocity.y, -velocity.z);
+   mass = DEFAULT_MASS;
+}
+
+void Particle::update(float timeElapsed) {
+   setTimeElapsed(timeElapsed);
    interpolateLifeTime();
    interpolateSize();
    interpolateColor();
    interpolateRotation();
+   calculatePhysics();
 }
+
+void Particle::setTimeElapsed(float newTimeElapsed) {
+   timeElapsed = newTimeElapsed;
+} 
 
 void Particle::interpolateLifeTime() {
    life.time -= timeElapsed;
@@ -42,6 +65,24 @@ void Particle::interpolateColor() {
 
 void Particle::interpolateRotation() {
    rotationDegree++;
+}
+
+void Particle::calculatePhysics() {
+   calculateAcceleration();
+   calculateVelocity();
+   calculatePosition();
+}
+
+void Particle::calculateAcceleration() {
+   acceleration = force / mass;
+}
+
+void Particle::calculateVelocity() {
+   velocity = velocity + (acceleration * timeElapsed);
+}
+
+void Particle::calculatePosition() {
+   position = position + (velocity * timeElapsed + acceleration * PHYSICS_POSITION_CONSTANT * timeElapsed * timeElapsed);
 }
 
 bool Particle::isDead() {
@@ -64,9 +105,7 @@ void Particle::setRandomPosition() {
 }
 
 void Particle::setRotationAxis(Point3d newRotationAxis) {
-   rotationAxis.x = newRotationAxis.x;
-   rotationAxis.y = newRotationAxis.y;
-   rotationAxis.z = newRotationAxis.z;
+   rotationAxis = newRotationAxis;
 }
 
 void Particle::setRotationDegree(float newRotationDegree) {
