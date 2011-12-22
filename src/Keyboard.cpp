@@ -21,10 +21,10 @@ void keyboard(unsigned char key, int x, int y) {
 }
 
 void keyboardUp(unsigned char key, int x, int y) {
-   if (key >= CAPITAL_A || key <= CAPITAL_Z) {
+   if (key >= CAPITAL_A && key <= CAPITAL_Z) {
       keyboardState.set(key + DIFFERENCE_BETWEEN_CAP_AND_LOWER, false);
    }
-   if (key >= LOWERCASE_A || key <= LOWERCASE_Z) {
+   if (key >= LOWERCASE_A && key <= LOWERCASE_Z) {
       keyboardState.set(key - DIFFERENCE_BETWEEN_CAP_AND_LOWER, false);
    }
 

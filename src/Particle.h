@@ -16,6 +16,8 @@
 #define PHYSICS_POSITION_CONSTANT 0.5f
 #define DEFAULT_MASS 50
 
+typedef Point3d Vector;
+
 typedef struct Life {
    float time;
    float birthSize;
@@ -33,9 +35,9 @@ class Particle: public Object {
       Color color;
       Life life;
 
-      Point3d velocity;
-      Point3d acceleration;
-      Point3d force;
+      Vector velocity;
+      Vector acceleration;
+      Vector force;
       float mass;
 
       void initializeDefaultLifeVariables();
@@ -59,9 +61,16 @@ class Particle: public Object {
       void draw();
       void update(float timeElapsed);
       bool isDead();
-      void setRandomPosition();
       void setRotationAxis(Point3d newRotationAxis);
       void setRotationDegree(float newRotationDegree);
+      float setBirthSize(float newBirthSize);
+      float setDeathSize(float newDeathSize);
+      Color setBirthColor(Color newBirthColor);
+      Color setDeathColor(Color newDeathColor);
+      Vector setVelocity(Vector newVelocity);
+      Vector setAcceleration(Vector newAcceleration);
+      Vector setForce(Vector newForce);
+      void applySettings();
 };
 
 #endif

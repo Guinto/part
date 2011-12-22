@@ -7,7 +7,7 @@
 #define CAPITAL_A 65
 #define CAPITAL_Z 90
 #define LOWERCASE_A 97
-#define LOWERCASE_Z 112
+#define LOWERCASE_Z 122
 #define DIFFERENCE_BETWEEN_CAP_AND_LOWER 32
 
 void updateKeyboardStateInScene();

@@ -104,16 +104,92 @@ void Particle::draw() {
    } glPopMatrix();
 }
 
-void Particle::setRandomPosition() {
-   position.x = Utilities::randomNegOneToOne();
-   position.y = Utilities::randomNegOneToOne();
-   position.z = Utilities::randomNegOneToOne();
-}
-
 void Particle::setRotationAxis(Point3d newRotationAxis) {
    rotationAxis = newRotationAxis;
 }
 
 void Particle::setRotationDegree(float newRotationDegree) {
    rotationDegree = newRotationDegree;
+}
+
+float Particle::setBirthSize(float newBirthSize) {
+   life.birthSize = newBirthSize;
+   if (life.birthSize < 0) {
+      life.birthSize = 0;
+   }
+   return life.birthSize;
+}
+
+float Particle::setDeathSize(float newDeathSize) {
+   life.deathSize = newDeathSize;
+   if (life.deathSize < 0) {
+      life.deathSize = 0;
+   }
+   return life.deathSize;
+}
+
+Color Particle::setBirthColor(Color newBirthColor) {
+   life.birthColor = newBirthColor;
+   if (life.birthColor.red > 1) {
+      life.birthColor.red = 1;
+   }
+   if (life.birthColor.red < -1) {
+      life.birthColor.red = -1;
+   }
+   if (life.birthColor.green > 1) {
+      life.birthColor.green = 1;
+   }
+   if (life.birthColor.green < -1) {
+      life.birthColor.green = -1;
+   }
+   if (life.birthColor.blue > 1) {
+      life.birthColor.blue = 1;
+   }
+   if (life.birthColor.blue < -1) {
+      life.birthColor.blue = -1;
+   }
+   return life.birthColor;
+}
+
+Color Particle::setDeathColor(Color newDeathColor) {
+   life.deathColor = newDeathColor;
+   if (life.deathColor.red > 1) {
+      life.deathColor.red = 1;
+   }
+   if (life.deathColor.red < -1) {
+      life.deathColor.red = -1;
+   }
+   if (life.deathColor.green > 1) {
+      life.deathColor.green = 1;
+   }
+   if (life.deathColor.green < -1) {
+      life.deathColor.green = -1;
+   }
+   if (life.deathColor.blue > 1) {
+      life.deathColor.blue = 1;
+   }
+   if (life.deathColor.blue < -1) {
+      life.deathColor.blue = -1;
+   }
+   return life.deathColor;
+}
+
+Vector Particle::setVelocity(Vector newVelocity) {
+   velocity = newVelocity;
+   return velocity;
+}
+
+Vector Particle::setAcceleration(Vector newAcceleration) {
+   acceleration = newAcceleration;
+   return acceleration;
+}
+
+Vector Particle::setForce(Vector newForce) {
+   force = newForce;
+   return force;
+}
+
+void Particle::applySettings() {
+   initializeDefaultSize();
+   initializeColor();
 }

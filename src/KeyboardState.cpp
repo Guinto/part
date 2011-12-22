@@ -1,4 +1,5 @@
 #include "KeyboardState.h"
+#include <stdio.h>
 
 KeyboardState::KeyboardState() {
    for (unsigned int key = 0; key < NUMBER_OF_ASCII_KEYS; key++) {
